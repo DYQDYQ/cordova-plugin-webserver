@@ -17,9 +17,9 @@
         let dataRequest = request as! GCDWebServerFileRequest
         var body = ""
 
-        if dataRequest.hasBody() {
-            body = String(data: dataRequest.data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
-        }
+        //if dataRequest.hasBody() {
+        //    body = String(data: dataRequest.data, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
+        //}
 
         return [
             "requestId": requestUUID,
