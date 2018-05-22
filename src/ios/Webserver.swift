@@ -14,7 +14,7 @@
     }
 
     func requestToRequestDict(requestUUID: String, request: GCDWebServerRequest) -> Dictionary<String, Any> {
-        let dataRequest = request as! GCDWebServerDataRequest
+        let dataRequest = request as! GCDWebServerFileRequest
         var body = ""
 
         if dataRequest.hasBody() {
@@ -56,7 +56,8 @@
 
         // We got the dict so put information in the response
         let responseDict = self.responses[requestUUID] as! Dictionary<AnyHashable, Any>
-        let response = GCDWebServerDataResponse(text: responseDict["body"] as! String)
+        print(responseDict["body"])
+        let response = GCDWebServerFileResponse(path: responseDict["body"] as! String)
         response?.statusCode = responseDict["status"] as! Int
 
         for (key, value) in (responseDict["headers"] as! Dictionary<String, String>) {
@@ -81,7 +82,7 @@
         self.webServer.addHandler(
             match: {
                 (requestMethod, requestURL, requestHeaders, urlPath, urlQuery) -> GCDWebServerRequest? in
-                    return GCDWebServerDataRequest(method: requestMethod, url: requestURL, headers: requestHeaders, path: urlPath, query: urlQuery)
+                    return GCDWebServerFileRequest(method: requestMethod, url: requestURL, headers: requestHeaders, path: urlPath, query: urlQuery)
             },
             asyncProcessBlock: self.processRequest
         )
