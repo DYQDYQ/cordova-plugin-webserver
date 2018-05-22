@@ -57,7 +57,7 @@
         // We got the dict so put information in the response
         let responseDict = self.responses[requestUUID] as! Dictionary<AnyHashable, Any>
         print(responseDict["body"])
-        let response = GCDWebServerFileResponse(path: responseDict["body"] as! String)
+        let response = GCDWebServerFileResponse(file: responseDict["body"] as! String)
         response?.statusCode = responseDict["status"] as! Int
 
         for (key, value) in (responseDict["headers"] as! Dictionary<String, String>) {
